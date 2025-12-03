@@ -2,7 +2,7 @@ sudo pacman --noconfirm -S linux-hardened linux-hardened-headers
 yay --noconfirm -S apparmor.d-git
 sudo systemctl enable --now apparmor.service
 sudo sed -i 's/"quiet splash"/"quiet splash lsm=landlock,lockdown,yama,integrity,apparmor,bpf"/' /etc/default/limine
-grep '^timeout' /boot/limine.conf || (echo 'timeout: 30' | sudo tee -a /boot/limine.conf > /dev/null)
+sudo sed -i 's/^#timeout.*/timeout: 30/' /boot/limine.conf
 
 # firewall
 sudo ufw delete allow 53317/udp
